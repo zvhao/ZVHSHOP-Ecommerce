@@ -1,0 +1,121 @@
+@media only screen and (min-width: 601px) {
+
+    .header-left-mobile,
+    .payment-mobile,
+    .d-none__desktop {
+        display: none !important;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+
+    .header-mid,
+    .item-title,
+    .d-none__mobile,
+    .product-guide-use.mobile-hidden,
+    .cart-table thead,
+    .sub-total__cart,
+    .payment-desktop,
+    .left-product__thum {
+        display: none !important;
+    }
+
+    .header-cart-notice {
+        left: 14px;
+
+    }
+
+    .body-product {
+        padding: 20px 0;
+    }
+
+    .product-guide-use.desktop-hidden {
+        display: block;
+    }
+
+    .footer-mobile {
+
+        text-align: center;
+    }
+
+    .footer-item__link {
+        display: block !important;
+    }
+
+    .footer-list.footer-media__icon {
+        display: flex;
+        justify-content: space-around;
+    }
+
+    .footer__download {
+        display: flex;
+        justify-content: center;
+    }
+
+    #footer-contact {
+        left: 0px;
+    }
+
+    .footer-contact-item {
+        margin: 10px 0;
+    }
+
+    .nav-list {
+        flex-direction: column;
+    }
+
+    .main-menu {
+        position: fixed;
+        z-index: 1000;
+        width: 100%;
+    }
+
+    .pro-product-item__img {
+        height: 200px;
+    }
+
+    #checkout-cart {
+        width: 100%;
+        display: block;
+        text-align: center;
+        margin-top: 12px;
+    }
+
+    .mybill-buymore {
+        justify-content: space-between !important;
+    }
+
+    .mybill-buymore a {
+        width: 100%;
+        text-align: center;
+    }
+
+    #total-price {
+        justify-content: space-between !important;
+    }
+
+    .add-to-cart {
+        width: 100%;
+        margin-right: 20px;
+    }
+
+    .left-product {
+        flex-direction: column;
+    }
+
+    .info-product-short {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .form-update-cart {
+        padding: 0 !important;
+    }
+
+    .name-product {
+        overflow: auto;
+        text-overflow: unset;
+        white-space: initial;
+    }
+
+}

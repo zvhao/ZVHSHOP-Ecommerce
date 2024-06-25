@@ -1,0 +1,50 @@
+.heart {
+    position: relative; /* parent position */
+    width: 70px;
+    height: 70px;
+    background-color: #dc3545;
+
+    /* margin: 70px auto; */
+
+}
+
+.heart:before {
+    position: absolute; /* vị trí phụ thuộc vào parent position */
+    width: 70px;
+    height: 70px;
+    content: '';    /* khởi tạo rỗng cho thẻ giả */
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    -o-border-radius: 50%;
+    border-radius: 50%; /* bo tròn 4 góc của div để tạo hình tròn */
+    background-color: #dc3545;
+    bottom: 0px;
+    left: -35px;   /* vì div parent rộng 70px nên di chuyển before sang trái 100px để tâm before nằm trên cạnh dọc của div parent */
+}
+
+.heart:after {
+    position: absolute;
+    width: 70px;
+    height: 70px;
+    content: '';
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    -o-border-radius: 50%;
+    border-radius: 50%;
+    background-color: #dc3545;
+    top: -35px;
+    right: 0px;
+}
+
+.heart {
+    -webkit-transform: rotate(45deg);
+    -moz-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    -o-transform: rotate(45deg);
+    transform: rotate(45deg);
+}
+
+/* .btn-by-month:hover {
+    background-color: ;
+} */
+
