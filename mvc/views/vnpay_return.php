@@ -67,8 +67,7 @@
             // die();
             ?> -->
     <!--Begin display -->
-    <p>secureHash: <?= $secureHash ?></p>
-    <p>vnp_SecureHash: <?= $vnp_SecureHash ?></p>
+
     <div class="my-auto" style="border: 3px solid #037dff;
     border-radius: 5px !important; padding: 10px 30px;">
         <div class="header clearfix">

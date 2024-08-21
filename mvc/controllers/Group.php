@@ -2,7 +2,7 @@
 class Group extends Controller
 {
 
-    private $group;
+    private GroupUserModel $group;
     public function __construct()
     {
         $this->group = $this->model("GroupUserModel");
