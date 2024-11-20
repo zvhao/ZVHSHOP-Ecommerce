@@ -1,6 +1,6 @@
 <?php
-if(!empty($data['msg'])) {
-    echo '<div class="alert alert-'.$data['type'].'">'.$data['msg'].'</div>';
+if (!empty($data['msg'])) {
+  echo '<div class="alert alert-' . $data['type'] . '">' . $data['msg'] . '</div>';
 }
 ?>
 <form method="POST">
