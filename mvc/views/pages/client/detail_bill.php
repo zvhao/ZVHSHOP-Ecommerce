@@ -1,5 +1,6 @@
 <?php
-redirectToDetailBill($data['listIdBill'])
+$getPhone = $_GET['phone'] ?? '';
+redirectToDetailBill($data['listIdBill'], $data['bill']['tel'], $getPhone)
 
 // show_array($_SESSION);
 
@@ -30,7 +31,7 @@ redirectToDetailBill($data['listIdBill'])
 					<a class="btn btn-main fs-4" href="<?= _WEB_ROOT . '/contact' ?>">LIÊN HỆ</a>
 				</h2>
 				<p class="print-none">
-					<a class="btn btn-outline-main fs-4" href="<?= _WEB_ROOT . '/bill/show_bill' ?>">ĐƠN HÀNG CỦA TÔI</a>
+					<a class="btn btn-outline-main fs-4" href="<?= _WEB_ROOT . '/bill/show_bill' ?><?= isset($_GET['phone']) ? '?phone=' . $_GET['phone'] : '' ?>">ĐƠN HÀNG CỦA TÔI</a>
 					<button class="btn btn-outline-main fs-4" onclick="window.print()">In Hóa Đơn</button>
 				</p>
 				<p>
@@ -46,7 +47,7 @@ redirectToDetailBill($data['listIdBill'])
 					foreach ($data['detailBill'] as $item) {
 				?>
 						<li class="row checkout-item-pro">
-							<p class="col-2 m-0"><img width="60px" src="<?= _PATH_IMG_PRODUCT . $item['image'] ?>" alt=""></p>
+							<p class="col-2 m-0"><img class="border-main" width="60px" src="<?= _PATH_IMG_PRODUCT . $item['image'] ?>" alt=""></p>
 							<div class="col-7">
 
 								<p class="checkout-item-name"><?= $item['name_pro'] ?></p>
@@ -73,9 +74,9 @@ redirectToDetailBill($data['listIdBill'])
 					</div>
 				</div>
 				<div class="row my-3">
-					<div class="col">Trạng thái đơn hàng: <span class="text-color-main"><?= getStatusBill($data['bill']['status']) ?></div>
+					<div class="col">Trạng thái đơn hàng: <br> <span class="text-color-main"><?= getStatusBill($data['bill']['status']) ?></div>
 					<div class="col text-end">
-						<p>Phương thức thanh toán: <span class="text-color-main"><?= $data['bill']['method'] ?></span></p>
+						<p>Phương thức thanh toán: <br> <span class="text-color-main"><?= getMethodPaymentName($data['bill']['method']) ?></span></p>
 					</div>
 
 				</div>

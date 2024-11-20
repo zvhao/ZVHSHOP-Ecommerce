@@ -32,12 +32,12 @@
 			</a>
 		</div> -->
 		<div class="col-3 mb-3 p-3">
-			<a href="<?= _WEB_ROOT . '/bill' ?>" style="height: 200px;" class="d-flex p-3 align-items-center justify-content-around rounded-pill  text-center bg-danger">
+			<a href="<?= _WEB_ROOT . '/product/detail_product_admin/' . $data['bestSellerAll']['id_pro'] ?>" style="height: 200px;" class="d-flex p-3 align-items-center justify-content-around rounded-pill  text-center bg-danger">
 				<i class="display-3 fa-solid fa-star"></i>
 				<h5 class="display-5 m-0">
 					<p>BESTSELLER</p>
 					<p style="display: -webkit-box;-webkit-line-clamp: 2;-webkit-box-orient: vertical;overflow: hidden;"><?= $data['bestSellerAll']['name_pro'] ?></p>
-					<p class="m-0">ĐÃ BÁN <?= $data['bestSellerAll']['tong'] ?></p>
+					<p class="m-0">ĐÃ BÁN <?= $data['bestSellerAll']['tong'] ?> (ĐÃ GIAO)</p>
 				</h5>
 			</a>
 

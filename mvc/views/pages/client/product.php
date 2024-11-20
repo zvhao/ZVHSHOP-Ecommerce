@@ -47,16 +47,7 @@
             }
 
             ?>
-        <!-- <div class="dropdown col p-0">
-            <li class="category-item category-l dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                Giá
-            </li>
-            <ul class="dropdown-menu font-size-14" aria-labelledby="dropdownMenuButton1">
-                <li><a class="dropdown-item" href="">Dưới 1 triệu</a></li>
-                <li><a class="dropdown-item" href="">Từ 1 triệu đến 3 triệu</a></li>
-                <li><a class="dropdown-item" href="">Trên 3 triệu</a></li>
-            </ul>
-        </div> -->
+
     </ul>
 
 

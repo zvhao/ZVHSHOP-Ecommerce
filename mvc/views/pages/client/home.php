@@ -13,13 +13,13 @@
     </div>
     <div class="carousel-inner">
         <div class="carousel-item active">
-            <img src="<?= _PATH_IMG_PUBLIC . '/slide/1.png' ?>" class="d-block w-100" alt="...">
+            <img src="<?= _PATH_IMG_PUBLIC . 'slide/1.png' ?>" class="d-block w-100" alt="...">
         </div>
         <div class="carousel-item">
-            <img src="<?= _PATH_IMG_PUBLIC . '/slide/2.png' ?>" class="d-block w-100" alt="...">
+            <img src="<?= _PATH_IMG_PUBLIC . 'slide/2.png' ?>" class="d-block w-100" alt="...">
         </div>
         <div class="carousel-item">
-            <img src="<?= _PATH_IMG_PUBLIC . '/slide/3.png' ?>" class="d-block w-100" alt="...">
+            <img src="<?= _PATH_IMG_PUBLIC . 'slide/3.png' ?>" class="d-block w-100" alt="...">
         </div>
     </div>
     <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
@@ -78,8 +78,8 @@
 
                                 foreach ($data['productNew'] as $key => $product) {
                                     $data['cate_id'] = $category['id_cate'];
-                                    if ($count <= 4 && $product['cate_id'] == $category['id_cate'] && $data['cate_id'] == $category['id_cate']) {
-                                        $count++;
+                                    if ($product['cate_id'] == $category['id_cate'] && $data['cate_id'] == $category['id_cate']) {
+
                                 ?>
                                         <div class="product-item col-lg-3">
                                             <a href="<?= _WEB_ROOT . '/DetailProduct/product/' . $product['id'] ?>" class="home-product-item">
@@ -91,13 +91,13 @@
                                                     <div class="d-flex justify-content-between">
                                                         <span class="home-product-item__price-current"><?= numberFormat($product['price']) ?></span>
                                                         <span class="home-product-item__favorite font-size-14">
-                                                        <i class="<?= $product['liked'] == 1?'fa-solid':'fa-regular' ?> fa-heart"></i>
+                                                            <i class="<?= $product['liked'] == 1 ? 'fa-solid' : 'fa-regular' ?> fa-heart"></i>
                                                         </span>
                                                     </div>
                                                     <div class="home-product-item__action font-size-14">
                                                         <div class="d-flex justify-content-between">
                                                             <div class="home-product-item__rating">
-                                                            <?= getRatingStarRound($product['total_rating']) ?>
+                                                                <?= getRatingStarRound($product['total_rating']) ?>
                                                             </div>
                                                             <div class="home-product-item__sold">Đã bán <?= $product['sold'] ?></div>
                                                         </div>
@@ -107,10 +107,18 @@
                                                         <span class="home-product-item__brand">Lining</span>
                                                         <div class="home-product-item__origin-name">Korea</div>
                                                     </div> -->
-                                                    <div class="home-product-item__latest">
-                                                        <i class="fa-solid fa-check"></i>
-                                                        <span>Mới nhất</span>
-                                                    </div>
+                                                    <?php
+                                                    if ($count < 3) {
+                                                        $count++;
+                                                    ?>
+                                                        <div class="home-product-item__latest">
+                                                            <i class="fa-solid fa-check"></i>
+                                                            <span>Mới nhất</span>
+                                                        </div>
+                                                    <?php
+                                                    }
+
+                                                    ?>
                                                 </div>
                                             </a>
                                         </div>

@@ -3,13 +3,13 @@
 class Admin extends Controller
 {
 
-    private  $bills;
+    private UserModel $users;
+    private ProductModel $products;
+    private CategoryModel $categories;
+    private BillModel $bills;
     private  $cart;
-    private  $categories;
     private  $comment;
-    private  $products;
-    private  $users;
-    
+
     function __construct()
     {
         $this->users = $this->model('UserModel');
@@ -28,28 +28,28 @@ class Admin extends Controller
         $bestSellerAll = $this->bills->bestSellerAll();
         $top5BestSeller = $this->bills->top5BestSeller();
         $top5BestSellerNew = [];
-        foreach($top5BestSeller as $item) {
+        foreach ($top5BestSeller as $item) {
             $item['favorites'] = $this->products->countFavoritePro($item['id_pro']);
             $soldArr = $this->products->soldPro($item['id_pro']);
-            if($soldArr) {
+            if ($soldArr) {
                 $item['sold'] = $soldArr['sold'];
-            }  else $item['sold'] = 0;
+            } else $item['sold'] = 0;
 
             array_push($top5BestSellerNew, $item);
         }
         $top5Favorites = $this->bills->top5Favorites();
         $top5FavoritesNew = [];
-        foreach($top5Favorites as $item) {
+        foreach ($top5Favorites as $item) {
             $item['favorites'] = $this->products->countFavoritePro($item['id_pro']);
             $soldArr = $this->products->soldPro($item['id_pro']);
-            if($soldArr) {
+            if ($soldArr) {
                 $item['sold'] = $soldArr['sold'];
-            }  else $item['sold'] = 0;
+            } else $item['sold'] = 0;
 
             array_push($top5FavoritesNew, $item);
         }
 
-        // show_array($top5FavoritesNew);
+        // show_array($bestSellerAll);
 
         return $this->view('admin', [
             'title' => 'QUẢN LÝ',
@@ -64,5 +64,4 @@ class Admin extends Controller
             'top5FavoritesNew' => $top5FavoritesNew,
         ]);
     }
-
 }

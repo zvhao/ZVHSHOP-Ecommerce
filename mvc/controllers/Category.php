@@ -2,9 +2,9 @@
 class Category extends Controller
 {
 
-    
-    private $categories;
-    private $products;
+
+    private CategoryModel $categories;
+    private ProductModel $products;
     public function __construct()
     {
         $this->categories = $this->model('CategoryModel');
@@ -14,17 +14,25 @@ class Category extends Controller
     public function index()
     {
         $keyword = '';
+        $categoriesNew = [];
         if (isset($_GET['search']) && ($_GET['search'] != '')) {
             $keyword = $_GET['search'];
         }
         $cate_id = 0;
         $categories = $this->categories->getAll($keyword);
+
+        if ($categories) {
+            foreach ($categories as $item) {
+                $item['products'] = $this->products->getAll('', 0, $item['id'], '');
+                array_push($categoriesNew, $item);
+            }
+        }
         $getAllCl = $this->categories->getAllCl();
 
-        // show_array($getAllCl);
+        // show_array($categoriesNew);
         return $this->view('admin', [
             'page' => 'category/list',
-            'categories' => $categories,
+            'categories' => $categoriesNew,
             'getAllCl' => $getAllCl,
             'js' => ['deletedata', 'search'],
             'title' => 'DANH MỤC SẢN PHẨM',
@@ -119,16 +127,16 @@ class Category extends Controller
             'msg' => $msg,
             'type' => $type,
             'title' => 'DANH MỤC SẢN PHẨM'
-            
+
         ]);
     }
 
-    public function delete_category($id) {
+    public function delete_category($id)
+    {
         $status = $this->categories->deleteCate($id);
-        if($status) {
+        if ($status) {
             echo -1;
-        }
-        else {
+        } else {
             echo -2;
         }
     }

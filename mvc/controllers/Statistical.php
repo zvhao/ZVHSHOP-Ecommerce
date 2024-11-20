@@ -119,6 +119,7 @@ class Statistical extends Controller
                 $detailBillStatistical['user_id'] = 'Không có tài khoản';
             }
             // array_push($detailBillStatisticalNew, $detailBillStatistical);
+            // show_array($detailBillStatistical);
             print_r(json_encode($detailBillStatistical));
         }
     }

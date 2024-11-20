@@ -45,9 +45,15 @@ class UserModel extends DB
         }
     }
 
-    function SelectUser($id)
+    function SelectUser($id = 0, $email = '')
     {
-        $select = "SELECT * FROM users WHERE id = '$id'";
+        $select = "SELECT * FROM users WHERE 1";
+        if($id > 0) {
+            $select .= " AND id = '$id'";
+        }
+        if($email !== '') {
+            $select .= " AND email = '$email'";
+        }
         if ($this->pdo_query_one($select)) {
             return $this->pdo_query_one($select);
         } else {

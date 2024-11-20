@@ -36,7 +36,7 @@
                                         <h3 class="header-search-history-heading">TÌM KIẾM NHIỀU NHẤT</h3>
                                         <ul class="header-search-history-list">
                                             <li class="header-search-hisroty-item">
-                                                <a href="http://localhost/ZVHSHOP/product/show_product?cate=1">Vợt cầu lông</a>
+                                                <a href="<?= _WEB_ROOT . '/product/show_product' ?>?cate=1">Vợt cầu lông</a>
                                             </li>
                                             <li class="header-search-hisroty-item">
                                                 <a href="">Quả cầu lông</a>
@@ -188,11 +188,9 @@
                                     <span class="header-no-cart-msg">
                                         Chưa có sản phẩm
                                     </span>
-                                    <?php
-                                    if (!empty($_SESSION['user']['gr_id'])) {
-                                    ?>
-                                        <div class="d-flex justify-content-center mb-3"><a class="outline-main p-3 fs-4" href="<?= _WEB_ROOT . '/bill/show_bill' ?>">ĐƠN HÀNG CỦA TÔI</a></div>
-                                    <?php } ?>
+                                   
+                                        <div class="d-flex justify-content-center mb-3"><a class="outline-main p-3 fs-4" href="<?= _WEB_ROOT . '/bill/show_bill' ?>"><?= !empty($_SESSION['user']['gr_id'])?'ĐƠN HÀNG CỦA TÔI':'TRA CỨU ĐƠN HÀNG' ?></a></div>
+                                   
                                 </div>
 
                             <?php }

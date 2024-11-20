@@ -113,6 +113,7 @@
 		// show_array($data['detailCart']);
 	?>
 		<span class="fs-3">Không có sản phẩm nào trong giỏ hàng, click <a href="home">vào đây</a> để về trang chủ</span>
+		<div class="d-flex justify-content-center mb-3"><a class="outline-main p-3 fs-4" href="<?= _WEB_ROOT . '/bill/show_bill' ?>">TRA CỨU ĐƠN HÀNG</a></div>
 	<?php
 	}
 	?>

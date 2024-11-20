@@ -1,4 +1,4 @@
-<a href="<?php echo _WEB_ROOT . '/user/add_user' ?>" class="btn btn-primary mb-2">Thêm người dùng</a>
+<a href="<?= _WEB_ROOT . '/user/add_user' ?>" class="btn btn-primary mb-2">Thêm người dùng</a>
 
 
 <div class="mb-3">
@@ -10,7 +10,7 @@
 <?php
 if (isset($_SESSION['msg']) && $_SESSION['msg'] != "") {
 ?>
-    <div class="alert alert-success"><?php echo  $_SESSION['msg'] ?></div>
+    <div class="alert alert-success"><?= $_SESSION['msg'] ?></div>
 <?php
     $_SESSION['msg'] = '';
 }
@@ -35,19 +35,19 @@ if (isset($_SESSION['msg']) && $_SESSION['msg'] != "") {
             foreach ($data['users'] as $user) {
         ?>
                 <tr>
-                    <td class="align-middle" scope="row"><b><?php echo $user['id'] ?></b></td>
-                    <td class="align-middle "><?php echo $user['name'] ?></td>
-                    <td class="align-middle "><img src="<?php echo _PATH_AVATAR . $user['avatar'] ?>" class="align-middle img-thumbnail" style="width: 80px; height: 80px; margin-top: 5px; max-width: 100%; object-fit: cover; object-position: center;"></td>
-                    <td class="align-middle" style="width: 100px;"><?php echo '<p class="m-0">' . $user['phone'] . '</p>' . '<p class="m-0">' . $user['email'] . '</p>' . '<p>' . $user['address'] . '</p>' ?></td>
-                    <td class="align-middle "><?php echo $user['created_at'] ?></td>
-                    <td class="align-middle "><?php echo $user['updated_at'] ?></td>
+                    <td class="align-middle" scope="row"><b><?= $user['id'] ?></b></td>
+                    <td class="align-middle "><?= $user['name'] ?></td>
+                    <td class="align-middle "><img src="<?= $user['avatar'] ? _PATH_AVATAR . $user['avatar'] : _PATH_IMG_PUBLIC . 'profile.jpg' ?>" class="align-middle img-thumbnail" style="width: 80px; height: 80px; margin-top: 5px; max-width: 100%; object-fit: cover; object-position: center;"></td>
+                    <td class="align-middle" style="width: 100px;"><?= '<p class="m-0">' . $user['phone'] . '</p>' . '<p class="m-0">' . $user['email'] . '</p>' . '<p>' . $user['address'] . '</p>' ?></td>
+                    <td class="align-middle "><?= $user['created_at'] ?></td>
+                    <td class="align-middle "><?= $user['updated_at'] ?></td>
 
-                    <td class="align-middle "><?php echo getNameUserGroup($user['gr_id']) ?></td>
+                    <td class="align-middle "><?= getNameUserGroup($user['gr_id']) ?></td>
                     <td class="align-middle text-center ">
-                        <a class="align-middle btn btn-outline-primary" href="<?php echo _WEB_ROOT . '/user/update_user/' . $user['id'] ?>">
+                        <a class="align-middle btn btn-outline-primary" href="<?= _WEB_ROOT . '/user/update_user/' . $user['id'] ?>">
                             <i class="align-middle fas fa-edit"></i>
                         </a>
-                        <a class="align-middle handle_delete btn btn-outline-danger" href="<?php echo _WEB_ROOT . '/user/delete_user/' . $user['id'] ?>">
+                        <a class="align-middle handle_delete btn btn-outline-danger" href="<?= _WEB_ROOT . '/user/delete_user/' . $user['id'] ?>">
                             <i class="align-middle fas fa-user-times"></i>
                         </a>
                     </td>

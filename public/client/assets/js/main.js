@@ -125,12 +125,12 @@ pwShowHide.forEach((eyeIcon) => {
 $(function () {
   $(".content-name").hover(
     function () {
-      $(".content-name").stop().animate({
+      $(this).stop().animate({
         width: 1194,
       });
     },
     function () {
-      $(".content-name").stop().animate({
+      $(this).stop().animate({
         width: 600,
       });
     }

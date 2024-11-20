@@ -1,3 +1,5 @@
+<a class="mb-2 btn btn-primary" href="<?php echo _WEB_ROOT . '/bill/add_bill_admin' ?>">Thêm đơn hàng</a>
+
 <div class="mb-3 row gap-3">
 
 	<form class="col-4" action="<?= _WEB_ROOT . '/bill' ?>" method="POST">

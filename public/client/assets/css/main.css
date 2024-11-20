@@ -512,9 +512,6 @@
 
 }
 
-.nav-item>a>i {
-    font-size: 1.4rem;
-}
 
 .nav-item>a:hover {
     color: var(--main-color);
@@ -524,20 +521,15 @@
     color: var(--main-color);
 }
 
+.nav-item>a>i {
+    font-size: 1.4rem;
+    transition: transform 0.5s;
+}
+
 .nav-item>a:hover i {
-    color: black;
-    animation: rotate .5s forwards;
+    transform: rotate(-180deg);
 }
 
-@keyframes rotate {
-    from {
-        transform: rotate(0deg);
-    }
-
-    to {
-        transform: rotate(-180deg);
-    }
-}
 
 .active-header-nav {
     color: var(--main-color) !important;
@@ -803,6 +795,16 @@ a.header-heading-product:hover {
     transform: translateY(-3px);
     box-shadow: 0 3px 10px var(--main-color);
     text-decoration: none;
+}
+
+.home-product-item:hover .home-product-item__img img,
+.home-product-item:hover .pro-product-item__img img {
+    transform: scale(2.5);
+}
+
+.home-product-item__img img,
+.pro-product-item__img img {
+    transition: transform 2.5s ease;
 }
 
 .home-product-item__img,
@@ -1741,21 +1743,14 @@ a.google {
 
 
 
-.category-l:hover {
-    color: transparent;
-
-    animation: growthPro .2s ease-in alternate forwards;
+.category-l {
+    transition: color 0.2s ease-in, background-color 0.2s ease-in;
+    /* Nếu bạn muốn hiệu ứng mượt mà khi hover */
 }
 
-@keyframes growthPro {
-    from {
-        width: 100%;
-    }
-
-    to {
-        color: var(--white-color);
-        background-color: var(--main-color);
-    }
+.category-l:hover {
+    color: var(--white-color);
+    background-color: var(--main-color);
 }
 
 .active-cate {
@@ -1849,6 +1844,14 @@ a.google {
     padding: 15px;
 }
 
+.detail-product .img-product {
+    transition: transform 2.5s ease;
+}
+
+.detail-product .img-product:hover {
+    transform: scale(2.5);
+}
+
 .left-product img {
     margin: auto;
     /* display: block; */
@@ -1897,6 +1900,9 @@ a.google {
     padding: 11px;
     border-radius: 50%;
     color: #fff;
+    height: 36px;
+    width: 36px;
+    text-align: center;
 }
 
 .num-order {
@@ -2182,6 +2188,7 @@ a.google {
         flex-direction: column;
         font-size: 2rem !important;
     }
+
     .col-6 {
         width: 100% !important;
     }

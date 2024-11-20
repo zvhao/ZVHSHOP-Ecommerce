@@ -31,9 +31,7 @@ if (!empty($_SESSION['msg'])) {
                 <tr>
                     <th scope="row"><?php echo $category['id'] ?></th>
                     <td><?php echo $category['name'] ?></td>
-                    <th scope="row"><?php
-                    echo $data['getAllCl'][$category['id']-1]['count_cate'];
-                    ?></th>
+                    <th scope="row"><?= count($category['products']) ?></th>
                     <td><?php echo $category['created_at'] ?></td>
                     <td class="text-center"><a class="btn btn-outline-primary" href="<?php echo _WEB_ROOT . '/category/update_category/' . $category['id'] ?>"><i class="far fa-edit"></i></a></td>
                     <td class="text-center"><a class="handle_delete btn btn-outline-danger" href="<?php echo _WEB_ROOT . '/category/delete_category/' . $category['id'] ?>">

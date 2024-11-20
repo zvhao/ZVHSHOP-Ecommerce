@@ -15,7 +15,7 @@ class BillModel extends DB
 		$this->pdo_execute($insert);
 	}
 
-	public function getAllBill($status = -1, $user_id = 0, $keyword = '')
+	public function getAllBill($status = -1, $user_id = 0, $keyword = '', $phone = '')
 	{
 		$select = "SELECT * FROM bills WHERE 1 ";
 		if ($status > -1) {
@@ -24,12 +24,26 @@ class BillModel extends DB
 		if ($user_id > 0) {
 			$select .= " AND user_id = $user_id ";
 		}
+		if ($phone !== '') {
+			$select .= "AND tel = '$phone'";
+		}
 		if ($keyword  != '') {
 			$select .= " AND email like '%" . $keyword . "%' OR address like '%" . $keyword . "%' OR fullname like '%" . $keyword . "%' OR method like '%" . $keyword . "%' OR tel like '%" . $keyword . "%'";
 		}
 		$select .= " ORDER BY created_at DESC";
 		return $this->pdo_query($select);
 	}
+
+	public function getBillByPhone($phone)
+	{
+		$select = "SELECT * FROM bills WHERE tel = '$phone' ORDER BY created_at DESC";
+		if ($this->pdo_query($select)) {
+			return $this->pdo_query($select);
+		} else {
+			return [];
+		}
+	}
+
 	public function getAllBillAdmin($status = -1, $keyword = '', $start, $num_per_page)
 	{
 		$select = "SELECT * FROM bills WHERE 1 ";
@@ -52,6 +66,12 @@ class BillModel extends DB
 	function updateBill($id, $status, $updated_at)
 	{
 		$update = "UPDATE bills SET status = '$status', updated_at = '$updated_at' WHERE id = '$id'";
+		return $this->pdo_execute($update);
+	}
+
+	function updateBillByUser($email, $id_user)
+	{
+		$update = "UPDATE bills SET user_id = '$id_user' WHERE email = '$email'";
 		return $this->pdo_execute($update);
 	}
 
@@ -91,9 +111,26 @@ class BillModel extends DB
 	}
 	public function bestSellerAll()
 	{
-		$select = " SELECT name_pro,SUM(qty) as tong  FROM detail_bill  GROUP BY id_pro  HAVING SUM(qty) = (SELECT MAX(tong) as tong FROM (SELECT id_pro,SUM(qty) as tong  FROM detail_bill GROUP BY id_pro) as abc)";
+		$select = "
+        SELECT id_pro, name_pro, SUM(detail_bill.qty) as tong
+        FROM detail_bill
+        JOIN bills ON bills.id = detail_bill.id_bill
+        WHERE bills.status = 2
+        GROUP BY id_pro
+        HAVING tong = (
+            SELECT MAX(tong) 
+            FROM (
+                SELECT id_pro, SUM(detail_bill.qty) as tong
+                FROM detail_bill
+                JOIN bills ON bills.id = detail_bill.id_bill
+                WHERE bills.status = 2
+                GROUP BY id_pro
+            ) as abc
+        )
+    ";
 		return $this->pdo_query_one($select);
 	}
+
 
 	public function sumBillStatistical($dateStart, $dateEnd)
 	{
@@ -147,12 +184,14 @@ class BillModel extends DB
 		return $this->pdo_query($select);
 	}
 
-	public function top5BestSeller() {
+	public function top5BestSeller()
+	{
 		$select = "SELECT id_pro, name_pro, detail_bill.image, detail_bill.price, total_rating, SUM(qty) as sumQty FROM detail_bill JOIN bills ON detail_bill.id_bill = bills.id JOIN products ON detail_bill.id_pro = products.id WHERE status = 2 GROUP BY id_pro ORDER BY sumQty DESC LIMIT 5";
 		return $this->pdo_query($select);
 	}
 
-	public function top5Favorites() {
+	public function top5Favorites()
+	{
 		$select = "SELECT id_pro, name, image, total_rating, COUNT(*)countFavorite FROM `favorite` JOIN products ON favorite.id_pro = products.id GROUP BY id_pro ORDER BY count(*) desc LIMIT 5";
 		return $this->pdo_query($select);
 	}

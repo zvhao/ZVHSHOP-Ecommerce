@@ -81,6 +81,8 @@ class Bill extends Controller
 		// show_array($_SESSION['user']);
 		$infoCart = [];
 		$detailCart = [];
+		$user_id = 0;
+		$getAllBill = [];
 		if (isset($_SESSION['user']) && $_SESSION['user']['id']) {
 			$id_user = $_SESSION['user']['id'];
 			$detailCart = $this->cart->getAllDetailCart($id_user);
@@ -97,11 +99,16 @@ class Bill extends Controller
 		}
 		if (isset($_SESSION['user'])) {
 			$user_id = $_SESSION['user']['id'];
+			$getAllBill = $this->bills->getAllBill($status, $user_id, '');
+		}
+
+		if (isset($_GET['phone']) && $_GET['phone'] != '') {
+			$phone = $_GET['phone'];
+			$getAll = $this->bills->getAllBill($status, 0, '', $phone);
+			$getAllBill = $getAll;
 		}
 		$categories = $this->categories->getAllCl();
 
-		$getAllBill = $this->bills->getAllBill($status, $user_id, '');
-		// show_array($getAllBill);
 		$billsNew = [];
 
 		foreach ($getAllBill as $bill) {
@@ -121,6 +128,8 @@ class Bill extends Controller
 
 		]);
 	}
+
+
 
 	public function detail_bill($id)
 	{
@@ -247,6 +256,17 @@ class Bill extends Controller
 		}
 	}
 
+	function add_bill_admin()
+	{
+
+		return $this->view('admin', [
+			'page' => 'bill/add',
+			'js' => ['bill'],
+			'title' => 'Thêm đơn hàng',
+
+		]);
+	}
+
 	function update_bill($id)
 	{
 		$bill = $this->bills->SelectOneBill($id);
@@ -345,7 +365,9 @@ class Bill extends Controller
 			$vnp_Url .= 'vnp_SecureHash=' . $vnpSecureHash;
 		}
 		$returnData = array(
-			'code' => '00', 'message' => 'success', 'data' => $vnp_Url
+			'code' => '00',
+			'message' => 'success',
+			'data' => $vnp_Url
 		);
 		if (isset($_POST['redirect'])) {
 			header('Location: ' . $vnp_Url);

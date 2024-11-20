@@ -18,12 +18,12 @@ function sendMail($to, $subtext, $content)
         $mail->Host       = 'smtp.gmail.com';                     //Set the SMTP server to send through
         $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
         $mail->Username   = 'zvh.mediacomm@gmail.com';                     //SMTP username
-        $mail->Password   = 'mpysygxyqlwlscip';                               //SMTP password
+        $mail->Password   = 'caytyxwdjhggwsnh';                               //SMTP password
         $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;            //Enable implicit TLS encryption
         $mail->Port       = 465;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
 
         //Recipients
-        $mail->setFrom('nguyenvanhao29102001@gmail.com', 'ZVHSHOP');
+        $mail->setFrom('zvh.mediacomm@gmail.com', 'ZVHSHOP');
         $mail->addAddress($to);     //Add a recipient
         // $mail->addAddress('ellen@example.com');               //Name is optional
         // $mail->addReplyTo($to);

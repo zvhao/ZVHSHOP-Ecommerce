@@ -1,10 +1,14 @@
 // Lấy path của URL hiện tại
+var location1 = window.location
 var origin = window.location.origin;
 var pathname = window.location.pathname;
 var project_name = pathname.split("/")[1];
-var path_root = origin + "/" + project_name;
-
+var path_root = origin
+if(window.location.host == 'localhost') {
+  path_root = origin + "/" + project_name;
+}
 // Hiển thị path
+console.log(location1);
 console.log(origin);
 console.log(path_root);
 

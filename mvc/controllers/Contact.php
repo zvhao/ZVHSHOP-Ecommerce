@@ -24,11 +24,15 @@ class Contact extends Controller
     {
         $infoCart = [];
         $detailCart = [];
+        $id_user = 0;
+        $contacts = [];
         if (isset($_SESSION['user']) && $_SESSION['user']['id']) {
             $id_user = $_SESSION['user']['id'];
             $detailCart = $this->cart->getAllDetailCart($id_user);
             $infoCart = $this->cart->SelectCart($id_user);
-            // show_array($infoCart);
+
+            $contacts = $this->contacts->getAllContact('', '', $_SESSION['user']['email']);
+            // show_array($contacts);
         }
         if (isset($_SESSION['cart']['buy'])) {
             $detailCart = $_SESSION['cart']['buy'];
@@ -45,6 +49,8 @@ class Contact extends Controller
         }
 
 
+
+
         $this->view("client", [
             'page' => 'contact',
             'title' => 'Liên hệ',
@@ -54,6 +60,7 @@ class Contact extends Controller
             'products' => $productNew,
             'infoCart' => $infoCart,
             'detailCart' => $detailCart,
+            'contacts' => $contacts,
         ]);
     }
 
@@ -62,10 +69,10 @@ class Contact extends Controller
         $responded = 'NULL';
         $orderBy = '';
 
-        if(isset($_GET['responded']) && $_GET['responded'] != '') {
+        if (isset($_GET['responded']) && $_GET['responded'] != '') {
             $responded = $_GET['responded'];
         }
-        if(isset($_GET['order_by']) && $_GET['order_by'] != '') {
+        if (isset($_GET['order_by']) && $_GET['order_by'] != '') {
             $orderBy = $_GET['order_by'];
         }
 
@@ -134,11 +141,9 @@ class Contact extends Controller
                 $checkLogin = false;
             }
 
-                $_SESSION['msg_contact'] = $message;
-                $_SESSION['type_contact'] = $type_contact;
-                header('Location: ' . _WEB_ROOT . '/contact/admin');
-
+            $_SESSION['msg_contact'] = $message;
+            $_SESSION['type_contact'] = $type_contact;
+            header('Location: ' . _WEB_ROOT . '/contact/admin');
         }
     }
 }
-

@@ -1,7 +1,7 @@
 <?php
-if (!isset($_SESSION['user'])) {
-	redirectTo('');
-}
+// if (!isset($_SESSION['user'])) {
+// 	redirectTo('');
+// }
 
 ?>
 <div class="grid wide">
@@ -18,12 +18,12 @@ if (!isset($_SESSION['user'])) {
 			<div class="intro-heading p-4 pt-0">
 				<span class="font-weight-bold text-center">LOẠI</span>
 			</div>
-			<div  data-aos="fade-right">
+			<div data-aos="fade-right">
 				<ul>
 					<li><a class="
 				<?php if (!isset($_GET['type'])) {
 					echo "bill-name-type-active";
-				} ?>" href="<?= _WEB_ROOT . '/bill/show_bill' ?>">Tất cả</a> </li>
+				} ?>" href="<?= _WEB_ROOT . '/bill/show_bill' ?><?= isset($_GET['phone']) ? '?phone=' . $_GET['phone'] : '' ?>">Tất cả</a> </li>
 
 					<li class="bill-name-type d-flex align-items-center">
 						<a class="
@@ -31,7 +31,7 @@ if (!isset($_SESSION['user'])) {
 					if (isset($_GET['type']) && $_GET['type'] == 0) {
 						echo "bill-name-type-active ps-4";
 					}
-					?>" href="<?= _WEB_ROOT . '/bill/show_bill?type=0' ?>">Đang xác nhận</a>
+					?>" href="<?= _WEB_ROOT . '/bill/show_bill?type=0' ?><?= isset($_GET['phone']) ? '&phone=' . $_GET['phone'] : '' ?>">Đang xác nhận</a>
 					</li>
 
 					<li class="bill-name-type d-flex align-items-center
@@ -40,7 +40,7 @@ if (!isset($_SESSION['user'])) {
 										if (isset($_GET['type']) && $_GET['type'] == 1) {
 											echo "bill-name-type-active ps-4";
 										}
-										?>" href="<?= _WEB_ROOT . '/bill/show_bill?type=1' ?>">Đang vận chuyển</a>
+										?>" href="<?= _WEB_ROOT . '/bill/show_bill?type=1' ?><?= isset($_GET['phone']) ? '&phone=' . $_GET['phone'] : '' ?>">Đang vận chuyển</a>
 					</li>
 
 					<li class="bill-name-type d-flex align-items-center 
@@ -50,23 +50,34 @@ if (!isset($_SESSION['user'])) {
 										if (isset($_GET['type']) && $_GET['type'] == 2) {
 											echo "bill-name-type-active ps-4";
 										}
-										?>" href="<?= _WEB_ROOT . '/bill/show_bill?type=2' ?>">Đã giao</a>
+										?>" href="<?= _WEB_ROOT . '/bill/show_bill?type=2' ?><?= isset($_GET['phone']) ? '&phone=' . $_GET['phone'] : '' ?>">Đã giao</a>
 					</li>
 				</ul>
 			</div>
 
 		</div>
-		<div class="col-9 px-4"  data-aos="fade-left">
-			<div class="intro-heading p-4 pt-0"  data-aos="fade-bottom">
+		<div class="col-9 px-4" data-aos="fade-left">
+			<div class="intro-heading p-4 pt-0" data-aos="fade-bottom">
 				<span class="font-weight-bold text-center"><?= $data['title'] ?></span>
 			</div>
 
+			<div class="mb-5">
+				<span class="fs-3 ">Tra cứu đơn hàng</span>
+
+				<form action="" method="get" style="max-width: 435px" class=" header-search-form input-group">
+					<input type="text" class=" form-control" value="<?= $_GET['phone'] ?? '' ?>" placeholder="Nhập số điện thoại cần tra cứu" name="phone">
+					<button class="btn-search btn" type="submit">
+						<i class="fa-solid fa-magnifying-glass"></i>
+					</button>
+				</form>
+
+			</div>
 			<?php
 			if (isset($data['getAllBill']) && !empty($data['getAllBill'])) {
 				foreach ($data['getAllBill'] as $bill) {
 					// show_array($bill);
 			?>
-					<div class="bill-section mb-5"  data-aos="fade-left">
+					<div class="bill-section mb-5" data-aos="fade-left">
 						<div class="d-flex justify-content-between border-bottom-main p-3">
 							<span class="fs-3"><?= 'Thời gian tạo: ' . $bill['created_at'] ?></span>
 							<span class="fs-3" style="color: blue"><?php if (getStatusBill($bill['status'])) ?></span>
@@ -97,7 +108,7 @@ if (!isset($_SESSION['user'])) {
 							?>
 						</ul>
 						<div class="d-flex justify-content-between align-items-lg-center fs-3 p-3 pe-5 bill-total">
-							<a href="<?= _WEB_ROOT . '/bill/detail_bill/' . $bill['id'] ?>" class="text-color-main outline-main p-2">Chi tiết đơn hàng</a>
+							<a href="<?= _WEB_ROOT . '/bill/detail_bill/' . $bill['id'] ?><?= isset($_GET['phone']) ? '?phone=' . $_GET['phone'] : '' ?>" class="text-color-main outline-main p-2">Chi tiết đơn hàng</a>
 							<div>
 								<span>Tổng số tiền: </span>
 								<span class="text-color-main fw-bold fs-2"><?= numberFormat($bill['total']) ?></span>

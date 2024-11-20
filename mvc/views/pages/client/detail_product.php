@@ -40,14 +40,14 @@
                 <div style="--swiper-navigation-color: #fff; --swiper-pagination-color: #fff" class="col-12 col-lg-9 swiper mySwiper2">
                     <div class="swiper-wrapper">
                         <div class="swiper-slide swiper-slide-r">
-                            <img class="col w-100" style="width: 380px; height: 380px; max-width: 100%; object-fit: cover; object-position: center;" src="<?php echo _PATH_IMG_PRODUCT . $data['product']['image'] ?>" alt="">
+                            <img class="col w-100 img-product" style="width: 380px; height: 380px; max-width: 100%; object-fit: cover; object-position: center;" src="<?php echo _PATH_IMG_PRODUCT . $data['product']['image'] ?>" alt="">
                         </div>
                         <?php
                         if (isset($data['img_product']) && $data['img_product'] != '') {
                             foreach ($data['img_product'] as $item) {
                         ?>
                                 <div class="swiper-slide swiper-slide-r">
-                                    <img class="col w-100" style="width: 380px; height: 380px; max-width: 100%; object-fit: cover; object-position: center;" src="<?php echo _PATH_IMG_PRODUCT . $item['image'] ?>" alt="">
+                                    <img class="col w-100 img-product" style="width: 380px; height: 380px; max-width: 100%; object-fit: cover; object-position: center;" src="<?php echo _PATH_IMG_PRODUCT . $item['image'] ?>" alt="">
 
                                 </div>
                         <?php
@@ -132,7 +132,7 @@
     <div class="content-detail">
         <p class="mb-5 heading-detail-section">CHI TIẾT SẢN PHẨM</p>
         <div class="desc-short-product" style="height: auto; overflow: hidden;">
-            <p><?= $data['product']['description'] ?></p>
+            <?= eval('?>' . $data['product']['description'] . '<?php ')  ?>
         </div>
     </div>
 

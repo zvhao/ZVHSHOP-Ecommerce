@@ -13,8 +13,7 @@ class User extends Controller
         $this->group = $this->model("GroupUserModel");
         $this->user = $this->model("UserModel");
         $this->categories = $this->model('CategoryModel');
-		$this->cart = $this->model('CartModel');
-
+        $this->cart = $this->model('CartModel');
     }
 
     public function index()
@@ -34,6 +33,31 @@ class User extends Controller
             'keyword' => $keyword
 
         ]);
+    }
+
+    public function get_user()
+    {
+        if (isset($_POST['query']) && ($_POST['query'])) {
+            $keyword = $_POST['query'];
+            $results = $this->user->getAll($keyword, 0, 0);
+            if ($results) {
+                foreach ($results as $customer) {
+                    echo '<a href="#" class="list-group-item list-group-item-action customer-item" 
+                             data-id="' . $customer['id'] . '" 
+                             data-name="' . htmlspecialchars($customer['name'], ENT_QUOTES) . '" 
+                             data-phone="' . htmlspecialchars($customer['phone'], ENT_QUOTES) . '" 
+                             data-email="' . htmlspecialchars($customer['email'], ENT_QUOTES) . '" 
+                             data-address="' . htmlspecialchars($customer['address'], ENT_QUOTES) . '">' . 
+                             '<strong>' . $customer['name'] . '</strong><br>
+                             Phone: ' . $customer['phone'] . '<br>
+                             Email: ' . $customer['email'] . '<br>
+                             Address: ' . $customer['address'] . '
+                          </a>';
+                }
+            } else {
+                echo '<p class="list-group-item">Không tìm thấy khách hàng</p>';
+            }
+        }
     }
 
     public function add_user()
@@ -122,16 +146,16 @@ class User extends Controller
 
             $header = 0;
 
-                $status = $this->user->updateUser($id, $name, $avatar, $group, $phone, $address, $desc, $updated_at);
-                if ($status) {
-                    $header = 1;
-                    $type = 'success';
-                    $msg = 'Update user successfully';
-                } else {
-                    $header = 0;
-                    $type = 'danger';
-                    $msg = 'System error';
-                }
+            $status = $this->user->updateUser($id, $name, $avatar, $group, $phone, $address, $desc, $updated_at);
+            if ($status) {
+                $header = 1;
+                $type = 'success';
+                $msg = 'Update user successfully';
+            } else {
+                $header = 0;
+                $type = 'danger';
+                $msg = 'System error';
+            }
 
 
             if ($header === 0) {

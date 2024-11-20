@@ -30,9 +30,18 @@
     <!-- Custom styles for this template -->
     <!-- CSS only -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+    <style>
+        .background {
+            background-image: url(<?= _PATH_IMG_PUBLIC . 'bia-vnpay.jpg' ?>);
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+
+        }
+    </style>
 </head>
 
-<body class="d-flex flex-column align-items-center justify-content-between" style="height:100vh">
+<body class="d-flex flex-column align-items-center justify-content-between background" style="height:100vh">
     <!-- <?php
 
             $vnp_HashSecret = "DHBYYHIKROSNLSXEKWLWCTCMRUFPWFJW"; //Chuỗi bí mật
@@ -67,10 +76,9 @@
             // die();
             ?> -->
     <!--Begin display -->
-    <p>secureHash: <?= $secureHash ?></p>
-    <p>vnp_SecureHash: <?= $vnp_SecureHash ?></p>
+
     <div class="my-auto" style="border: 3px solid #037dff;
-    border-radius: 5px !important; padding: 10px 30px;">
+    border-radius: 5px !important; padding: 10px 30px; background-color: #ffffffe3">
         <div class="header clearfix">
             <h3 class="text-center" style="color: #037dff;">VNPAY RESPONSE</h3>
         </div>

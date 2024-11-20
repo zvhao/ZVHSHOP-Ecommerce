@@ -19,7 +19,7 @@
                 <?php
                 if (isset($_SESSION['msglg']) && $_SESSION['msglg'] != "") {
                 ?>
-                    <div id="message" class="alert alert-danger"><?php echo $_SESSION['msglg'] ?></div>
+                    <div id="message" class="alert alert-<?= $_SESSION['typelg'] ?>"><?php echo $_SESSION['msglg'] ?></div>
                 <?php
                     $_SESSION['msglg'] = '';
                 }

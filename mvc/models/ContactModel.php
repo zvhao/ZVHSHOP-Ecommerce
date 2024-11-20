@@ -8,11 +8,14 @@ class ContactModel extends DB
         return $this->pdo_execute_lastInsertID($sql);
     }
 
-    function getAllContact($responded, $orderBy)
+    function getAllContact($responded, $orderBy, $email = '')
     {
         $select = "SELECT * FROM contact WHERE 1 ";
         if ($responded != '') {
             $select .= "AND responded IS $responded ";
+        }
+        if ($email != '') {
+            $select .= "AND email = '$email' ";
         }
         if ($orderBy != '') {
             $select .= " ORDER BY created_at $orderBy";

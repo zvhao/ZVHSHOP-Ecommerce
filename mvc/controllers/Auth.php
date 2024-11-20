@@ -7,6 +7,7 @@ class Auth extends Controller
     private  $categories;
     private  $users;
     private  $cart;
+    private $bills;
 
     function __construct()
     {
@@ -14,6 +15,7 @@ class Auth extends Controller
         $this->categories = $this->model('CategoryModel');
         $this->users = $this->model('UserModel');
         $this->cart = $this->model('CartModel');
+        $this->bills = $this->model('BillModel');
     }
 
     public function login()
@@ -338,6 +340,12 @@ class Auth extends Controller
         $emailAccess = $_GET['accessEmail'];
         if (password_verify($email, $emailAccess)) {
             $statusVerify =  $this->users->verifyEmail($email);
+            if ($statusVerify) {
+                if ($this->users->SelectUser(0, $email)) {
+                    $id_user = $this->users->SelectUser(0, $email)['id'];
+                    $this->bills->updateBillByUser($email, $id_user);
+                }
+            }
             $_SESSION['msglg'] = 'Xác thực thành công bạn có thể đăng nhâp ngay bay giờ';
             $_SESSION['typelg'] = 'success';
             header('Location: ' . _WEB_ROOT . '/Auth/login');

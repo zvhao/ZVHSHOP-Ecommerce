@@ -14,7 +14,7 @@ class ProductModel extends DB
         if ($cate_id > 0) {
             $select .= " AND cate_id = $cate_id";
         }
-        if(!empty($between)) {
+        if (!empty($between)) {
             $select .= " AND price BETWEEN $between";
         }
         $select .= " ORDER BY id DESC";
@@ -34,7 +34,7 @@ class ProductModel extends DB
         if ($cate_id > 0) {
             $select .= " AND cate_id = $cate_id";
         }
-        if(!empty($between)) {
+        if (!empty($between)) {
             $select .= " AND price BETWEEN $between";
         }
 
@@ -42,11 +42,13 @@ class ProductModel extends DB
         return $this->pdo_query($select);
     }
 
-    function countProduct() {
-        return $this->pdo_query_value('SELECT count(*) FROM products');
+    function countProduct($id_cate = 0)
+    {
+        return $this->pdo_query_value("SELECT count(*) FROM products WHERE cate_id = $id_cate");
     }
 
-    function SelectProByPage($start, $num_per_page, $keyword = '', $id = 0, $cate_id = 0, $between = '') {
+    function SelectProByPage($start, $num_per_page, $keyword = '', $id = 0, $cate_id = 0, $between = '')
+    {
         $select = "SELECT * FROM products WHERE 1";
         if (!empty($keyword)) {
             $select .= " AND  name like '%" . $keyword . "%'";
@@ -58,14 +60,15 @@ class ProductModel extends DB
         if ($cate_id > 0) {
             $select .= " AND cate_id = $cate_id";
         }
-        if(!empty($between)) {
+        if (!empty($between)) {
             $select .= " AND price $between";
         }
         $select .= "  ORDER BY id DESC LIMIT $start, $num_per_page";
         return $this->pdo_query($select);
     }
 
-    function getProductByCate($cate_id = 0){
+    function getProductByCate($cate_id = 0)
+    {
         $select = "SELECT * from products WHERE 1 order by created_at DESC";
         return $this->pdo_query($select);
     }
@@ -100,7 +103,8 @@ class ProductModel extends DB
         }
     }
 
-    function soldPro($id_pro) {
+    function soldPro($id_pro)
+    {
         $select = "SELECT SUM(detail_bill.qty) as sold  FROM bills JOIN detail_bill ON bills.id = detail_bill.id_bill where status = 2 AND detail_bill.id_pro = $id_pro GROUP by detail_bill.id_pro";
         return $this->pdo_query_one($select);
     }
@@ -162,9 +166,10 @@ class ProductModel extends DB
         }
     }
 
-    function addCart($id) {
-        
-        
+    function addCart($id)
+    {
+
+
         // return $this->pdo_query_one($select);
         $select = "SELECT * FROM products WHERE id = '$id'";
         $qty = 1;
@@ -179,11 +184,9 @@ class ProductModel extends DB
             'name' => $product['name'],
             'price' => $product['price'],
             'qty' => $qty,
-            
+
             'sub_total' => $product['price'] * $qty,
         );
-        
-
     }
 
     public function updateRating($id, $totalRating)
@@ -198,23 +201,27 @@ class ProductModel extends DB
         return $this->pdo_execute($sql);
     }
 
-    public function getOneRating($id) {
+    public function getOneRating($id)
+    {
         $select = "SELECT total_rating FROM products WHERE id = '$id'";
         return $this->pdo_query_value($select);
     }
 
 
-    
-    function getAllFavorite() {
+
+    function getAllFavorite()
+    {
         $select = "SELECT * FROM favorite";
         return $this->pdo_query($select);
     }
-    
-    function getAllFavoriteByUser($id_user) {
+
+    function getAllFavoriteByUser($id_user)
+    {
         $select = "SELECT products.id, products.name, products.image, products.price, products.total_rating FROM favorite JOIN products on favorite.id_pro = products.id  WHERE id_user = $id_user";
         return $this->pdo_query($select);
     }
-    function checkLikedPro($id_user, $id_pro) {
+    function checkLikedPro($id_user, $id_pro)
+    {
         $select = "SELECT * FROM favorite WHERE id_user = $id_user AND id_pro = $id_pro";
         if ($this->pdo_query_one($select)) {
             return $this->pdo_query_one($select);
@@ -222,21 +229,22 @@ class ProductModel extends DB
             return [];
         }
     }
-    
-    function insertFavorite($id_user, $id_pro, $created_at) {
+
+    function insertFavorite($id_user, $id_pro, $created_at)
+    {
         $sql = "INSERT INTO favorite(id_user, id_pro, created_at) VALUES('$id_user', '$id_pro', '$created_at')";
         return $this->pdo_execute_lastInsertID($sql);
     }
 
-    function deleteFavorite($id_user, $id_pro) {
+    function deleteFavorite($id_user, $id_pro)
+    {
         $delete = "DELETE FROM favorite WHERE id_user = $id_user AND id_pro = $id_pro";
         return $this->pdo_execute($delete);
     }
 
-    function countFavoritePro($id_pro) {
+    function countFavoritePro($id_pro)
+    {
         $select = "SELECT count(*) FROM `favorite` WHERE id_pro = $id_pro";
         return $this->pdo_query_value($select);
     }
 }
-
-
